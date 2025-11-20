@@ -159,7 +159,7 @@ export default function SettingsPage() {
       setUserImage(data.imageUrl);
       await update({ image: data.imageUrl });
       toast.success('Profile image updated');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Failed to upload image');
     }
   };

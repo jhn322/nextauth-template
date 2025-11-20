@@ -78,7 +78,7 @@ export const configureCallbacks = () => ({
     user?: User;
     _account?: Account | null;
     trigger?: 'signIn' | 'signUp' | 'update';
-    session?: any;
+    session?: { name?: string; image?: string };
   }) {
     if (trigger === 'update' && session?.name) {
       token.name = session.name;
