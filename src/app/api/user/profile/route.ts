@@ -49,7 +49,7 @@ export async function PATCH(req: Request) {
   }
 }
 
-export async function GET(_req: Request) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
 

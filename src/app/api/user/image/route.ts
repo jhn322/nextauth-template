@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     // Ensure directory exists
     try {
       await mkdir(uploadDir, { recursive: true });
-    } catch (_error) {
+    } catch {
     }
 
     const filepath = path.join(uploadDir, filename);
