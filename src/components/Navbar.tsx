@@ -23,6 +23,7 @@ import {
   Settings,
   User,
   LayoutDashboard,
+  BookOpen,
 } from 'lucide-react';
 import { AUTH_PATHS, PROTECTED_PATHS } from '@/lib/constants/routes';
 
@@ -85,7 +86,7 @@ export function Navbar() {
     <>
       <div className="h-16" />
       <div className="relative">
-        <nav className="bg-background/90 fixed top-0 right-0 left-0 z-50 w-full border-b backdrop-blur-sm transition-colors duration-500">
+        <nav className="bg-background fixed top-0 right-0 left-0 z-50 w-full border-b backdrop-blur-sm transition-colors duration-500">
           <div className="flex h-16 items-center justify-between px-6 md:px-8">
             <div className="flex items-center gap-8">
               <Link
@@ -109,7 +110,7 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`text-foreground hover:bg-accent rounded-lg px-2 py-1 transition-colors ${
+                    className={`text-foreground after:bg-foreground relative px-2 py-1 transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 ${
                       isActiveLink(item.href) && 'font-medium'
                     }`}
                   >
@@ -126,7 +127,7 @@ export function Navbar() {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="text-foreground hover:bg-accent hover:text-accent-foreground flex items-center gap-2 rounded-lg px-2 py-1 transition-colors"
+                      className="text-foreground hover:bg-accent hover:text-accent-foreground flex items-center gap-2 px-2 py-1 transition-colors"
                     >
                       <User />
                       <span>
@@ -142,19 +143,22 @@ export function Navbar() {
                   <DropdownMenuContent className="w-56" align="end" forceMount>
                     <DropdownMenuLabel className="font-normal">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Avatar className="h-9 w-9">
+                        <div className="flex min-w-0 items-center gap-3">
+                          <Avatar className="h-9 w-9 shrink-0">
                             <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium">
                               {session?.user?.email?.charAt(0).toUpperCase() ||
                                 'U'}
                             </AvatarFallback>
                           </Avatar>
-                          <div className="flex flex-col space-y-1">
-                            <p className="text-sm leading-none font-medium">
+                          <div className="flex min-w-0 flex-1 flex-col space-y-1">
+                            <p className="truncate text-sm leading-none font-medium">
                               {capitalizeFirstLetter(session?.user?.name) ||
                                 'Användare'}
                             </p>
-                            <p className="text-foreground/90 text-xs leading-none">
+                            <p
+                              className="text-foreground/90 truncate text-xs leading-none"
+                              title={session?.user?.email || ''}
+                            >
                               {session?.user?.email}
                             </p>
                           </div>
@@ -164,21 +168,27 @@ export function Navbar() {
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
 
-                    <Link href={PROTECTED_PATHS.SETTINGS_BASE}>
+                    <Link href={PROTECTED_PATHS.DASHBOARD_BASE}>
                       <DropdownMenuItem className="cursor-pointer">
                         <LayoutDashboard className="mr-2 h-4 w-4" />
-                        <span>Mina Sidor</span>
+                        <span>Dashboard</span>
                       </DropdownMenuItem>
                     </Link>
 
-                    <DropdownMenuItem disabled className="cursor-not-allowed">
-                      <Settings className="mr-2 h-4 w-4" />
-                      <span>Settings</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem disabled className="cursor-not-allowed">
-                      <HelpCircle className="mr-2 h-4 w-4" />
-                      <span>FAQ</span>
-                    </DropdownMenuItem>
+                    <Link href={PROTECTED_PATHS.DOCUMENTATION_BASE}>
+                      <DropdownMenuItem className="cursor-pointer">
+                        <BookOpen className="mr-2 h-4 w-4" />
+                        <span>Documentation</span>
+                      </DropdownMenuItem>
+                    </Link>
+
+                    <Link href={PROTECTED_PATHS.SETTINGS_BASE}>
+                      <DropdownMenuItem className="cursor-pointer">
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>Settings</span>
+                      </DropdownMenuItem>
+                    </Link>
+
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={() => signOut({ callbackUrl: '/' })}
@@ -209,11 +219,11 @@ export function Navbar() {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="text-foreground hover:bg-accent hover:text-accent-foreground relative h-10 w-10 p-1"
+                      className="text-foreground hover:bg-accent hover:text-accent-foreground relative flex h-10 w-10 items-center gap-2 p-1"
                       aria-label="User menu"
                     >
                       <div className="flex items-center gap-1">
-                        <User className="h-5 w-5" />
+                        <User className="h-8 w-8" />
                         <ChevronDown
                           className={`h-3 w-3 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
                         />
@@ -222,19 +232,22 @@ export function Navbar() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56" align="end" forceMount>
                     <DropdownMenuLabel className="font-normal">
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-9 w-9">
+                      <div className="flex min-w-0 items-center gap-3">
+                        <Avatar className="h-9 w-9 shrink-0">
                           <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium">
                             {session?.user?.email?.charAt(0).toUpperCase() ||
                               'U'}
                           </AvatarFallback>
                         </Avatar>
-                        <div className="flex flex-col space-y-1">
-                          <p className="text-sm leading-none font-medium">
+                        <div className="flex min-w-0 flex-1 flex-col space-y-1">
+                          <p className="truncate text-sm leading-none font-medium">
                             {capitalizeFirstLetter(session?.user?.name) ||
                               'Användare'}
                           </p>
-                          <p className="text-foreground/90 text-xs leading-none">
+                          <p
+                            className="text-foreground/90 truncate text-xs leading-none"
+                            title={session?.user?.email || ''}
+                          >
                             {session?.user?.email}
                           </p>
                         </div>
@@ -243,12 +256,12 @@ export function Navbar() {
                     <DropdownMenuSeparator />
                     {userRole === 'USER' && (
                       <Link
-                        href={PROTECTED_PATHS.SETTINGS_BASE}
+                        href={PROTECTED_PATHS.DASHBOARD_BASE}
                         onClick={() => setIsOpen(false)}
                       >
                         <DropdownMenuItem className="cursor-pointer">
                           <LayoutDashboard className="mr-2 h-4 w-4" />
-                          <span>Mina Sidor</span>
+                          <span>Dashboard</span>
                         </DropdownMenuItem>
                       </Link>
                     )}
@@ -323,10 +336,10 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative text-3xl transition-colors ${
+                  className={`after:bg-foreground relative text-3xl transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 ${
                     isActiveLink(item.href)
                       ? 'text-foreground font-medium'
-                      : 'hover:bg-secondary text-foreground rounded-lg px-2 py-1'
+                      : 'text-foreground px-2 py-1'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >

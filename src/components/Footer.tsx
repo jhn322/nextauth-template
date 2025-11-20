@@ -26,7 +26,7 @@ export default function Footer() {
               />
             </div>
             <h1 className="text-foreground ml-4 text-3xl font-bold tracking-tight">
-              {APP_NAME}
+              {/* {APP_NAME} */}
             </h1>
           </div>
 
@@ -58,7 +58,7 @@ export default function Footer() {
 
               <CardContent className="space-y-3 md:space-y-4">
                 <CardTitle className="text-foreground text-base font-semibold">
-                  FAQ
+                  More
                 </CardTitle>
                 <div className="grid gap-2 md:gap-3">
                   <Link href="/technology/growing">

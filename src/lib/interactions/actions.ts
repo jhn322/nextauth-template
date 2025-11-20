@@ -16,7 +16,7 @@ export async function markContactAsViewed(contactId: string): Promise<{
       console.error(
         '[InteractionAction] User not authenticated to mark contact as viewed.'
       );
-      return { success: false, message: 'Användaren är inte autentiserad.' };
+      return { success: false, message: 'User not authenticated.' };
     }
     const userId = session.user.id;
 
@@ -24,7 +24,7 @@ export async function markContactAsViewed(contactId: string): Promise<{
       console.warn(
         '[InteractionAction] contactId is required to mark as viewed.'
       );
-      return { success: false, message: 'Kontakt-ID saknas.' };
+      return { success: false, message: 'Contact ID is required.' };
     }
 
     await prisma.contactInteraction.upsert({
@@ -41,6 +41,8 @@ export async function markContactAsViewed(contactId: string): Promise<{
       update: {},
     });
 
+    revalidatePath(PROTECTED_PATHS.DASHBOARD_BASE);
+    revalidatePath(PROTECTED_PATHS.DOCUMENTATION_BASE);
     revalidatePath(PROTECTED_PATHS.SETTINGS_BASE);
 
     return { success: true };
@@ -51,7 +53,7 @@ export async function markContactAsViewed(contactId: string): Promise<{
     );
     return {
       success: false,
-      message: 'Kunde inte markera kontakten som sedd. Försök igen.',
+      message: 'Could not mark contact as viewed.',
     };
   }
 }

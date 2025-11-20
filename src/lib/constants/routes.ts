@@ -26,6 +26,8 @@ export const AUTH_PATHS = {
 // ** Protected Area Paths (require login) ** //
 export const PROTECTED_PATHS = {
   SETTINGS_BASE: '/settings',
+  DOCUMENTATION_BASE: '/documentation',
+  DASHBOARD_BASE: '/dashboard',
   // Reuse these for other protected paths e.g., settings, etc.
 } as const;
 
