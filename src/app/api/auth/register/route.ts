@@ -16,10 +16,9 @@ const TOKEN_EXPIRATION_DURATION = 24 * 60 * 60 * 1000;
  * Similar to the password reset token generation.
  * @returns An object containing the token and its hash.
  */
-const generateVerificationTokenAndHash = async () => {
+const generateVerificationToken = () => {
   const token = crypto.randomBytes(32).toString('hex');
-  const hash = await bcrypt.hash(token, HASH_ROUNDS);
-  return { token, hash };
+  return token;
 };
 
 export async function POST(req: Request) {
@@ -83,20 +82,19 @@ export async function POST(req: Request) {
     // --- Start Email Verification Process ---
     try {
       // Generate verification token
-      const { token, hash: hashedToken } =
-        await generateVerificationTokenAndHash();
+      const token = generateVerificationToken();
       const expires = new Date(Date.now() + TOKEN_EXPIRATION_DURATION);
 
-      // Store the *hashed* token in the new table
-      await prisma.emailVerificationToken.create({
+      // Store the token in the standard VerificationToken table
+      await prisma.verificationToken.create({
         data: {
-          userId: user.id,
-          token: hashedToken,
+          identifier: email, // Use email as identifier
+          token: token,      // Store raw token
           expires: expires,
         },
       });
 
-      // Send the verification email with the *unhashed* token
+      // Send the verification email
       await sendVerificationEmail(email, token);
     } catch (verificationError) {
       console.error(
