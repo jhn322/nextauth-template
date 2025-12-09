@@ -57,12 +57,12 @@ export function Hero() {
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-col justify-center gap-4 pt-4 sm:flex-row"
+          className="flex flex-row flex-wrap justify-center gap-3 pt-4"
         >
           <Link href={AUTH_PATHS.LOGIN}>
             <Button
               size="lg"
-              className="bg-primary text-primary-foreground group relative overflow-hidden rounded-full px-8 py-6 text-base shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              className="bg-primary text-primary-foreground group relative overflow-hidden rounded-full px-6 py-3 text-sm shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl md:px-8 md:py-6 md:text-base"
             >
               <span className="relative flex items-center gap-2">
                 Get Started
@@ -73,7 +73,7 @@ export function Hero() {
           <Link href={AUTH_PATHS.REGISTER}>
             <Button
               size="lg"
-              className="border-primary/40 bg-primary/10 hover:bg-primary/20 text-foreground rounded-full border-2 px-8 py-6 text-base shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              className="border-primary/40 bg-primary/10 hover:bg-primary/20 text-foreground rounded-full border-2 px-6 py-3 text-sm shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-xl md:px-8 md:py-6 md:text-base"
             >
               Sign Up Free
             </Button>

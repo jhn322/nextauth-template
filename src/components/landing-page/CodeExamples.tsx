@@ -188,7 +188,7 @@ export function CodeExamples() {
         </motion.div>
 
         <motion.div
-          className="grid gap-6 md:grid-cols-3 md:gap-6"
+          className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6"
           variants={containerVariants}
         >
           {/* Top Row: 3 cards */}
@@ -196,7 +196,7 @@ export function CodeExamples() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="flex flex-col"
+              className="flex min-w-0 flex-col"
             >
               {/* Code Card */}
               <div className="group relative flex h-96 flex-shrink-0 flex-col overflow-hidden rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.02] md:h-[500px]">
@@ -234,7 +234,7 @@ export function CodeExamples() {
               <motion.div
                 key={index + 3}
                 variants={itemVariants}
-                className={`${colSpan} flex flex-col`}
+                className={`${colSpan} flex min-w-0 flex-col`}
               >
                 {/* Code Card */}
                 <div
