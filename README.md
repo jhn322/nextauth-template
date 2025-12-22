@@ -1,4 +1,4 @@
-# Next.js Auth MongoDB Template
+# Next.js NextAuth Template
 
 A full-stack authentication template built with Next.js, MongoDB, and NextAuth.js. This template provides a complete authentication system with email/password authentication, OAuth providers (Google and GitHub), email verification, and password reset functionality.
 
@@ -215,19 +215,19 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the a
 
 ### Required Variables
 
-| Variable               | Description                                            | Example                                                                 |
-| ---------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------|
-| `DATABASE_URL`         | MongoDB connection string                              | `mongodb+srv://<username>:<password>@cluster.mongodb.net/dbname`        |
-| `NEXTAUTH_URL`         | Base URL of your application (production)              | `https://yourdomain.com`                                                |
-| `NEXTAUTH_SECRET`      | Secret key for NextAuth (generate securely)            | `base64-encoded-random-string`                                          |
-| `NEXT_PUBLIC_APP_URL`  | Public URL of your application                         | `https://yourdomain.com`                                                |
-| `GOOGLE_CLIENT_ID`     | Google OAuth Client ID                                 | `123456789-abc.apps.googleusercontent.com`                              |
-| `GOOGLE_CLIENT_SECRET` | Google OAuth Client Secret                             | `GOCSPX-xxxxxxxxxxxxx`                                                  |
-| `GITHUB_CLIENT_ID`     | GitHub OAuth Client ID                                 | `Iv1.xxxxxxxxxxxxx`                                                     |
-| `GITHUB_CLIENT_SECRET` | GitHub OAuth Client Secret                             | `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`                                      |
-| `BREVO_API_KEY`        | Brevo API key for sending emails                       | `xkeysib-xxxxxxxxxxxxx`                                                 |
-| `EMAIL_FROM_NAME`      | Name displayed in email sender                         | `My App`                                                                |
-| `EMAIL_FROM_ADDRESS`   | Email address to send from (must be verified in Brevo) | `noreply@yourdomain.com`                                                |
+| Variable               | Description                                            | Example                                                          |
+| ---------------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
+| `DATABASE_URL`         | MongoDB connection string                              | `mongodb+srv://<username>:<password>@cluster.mongodb.net/dbname` |
+| `NEXTAUTH_URL`         | Base URL of your application (production)              | `https://yourdomain.com`                                         |
+| `NEXTAUTH_SECRET`      | Secret key for NextAuth (generate securely)            | `base64-encoded-random-string`                                   |
+| `NEXT_PUBLIC_APP_URL`  | Public URL of your application                         | `https://yourdomain.com`                                         |
+| `GOOGLE_CLIENT_ID`     | Google OAuth Client ID                                 | `123456789-abc.apps.googleusercontent.com`                       |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth Client Secret                             | `GOCSPX-xxxxxxxxxxxxx`                                           |
+| `GITHUB_CLIENT_ID`     | GitHub OAuth Client ID                                 | `Iv1.xxxxxxxxxxxxx`                                              |
+| `GITHUB_CLIENT_SECRET` | GitHub OAuth Client Secret                             | `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`                               |
+| `BREVO_API_KEY`        | Brevo API key for sending emails                       | `xkeysib-xxxxxxxxxxxxx`                                          |
+| `EMAIL_FROM_NAME`      | Name displayed in email sender                         | `My App`                                                         |
+| `EMAIL_FROM_ADDRESS`   | Email address to send from (must be verified in Brevo) | `noreply@yourdomain.com`                                         |
 
 ### Development vs Production
 

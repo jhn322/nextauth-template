@@ -3,4 +3,5 @@ export interface GithubButtonProps {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
   isLoading?: boolean;
+  disabled?: boolean;
 }

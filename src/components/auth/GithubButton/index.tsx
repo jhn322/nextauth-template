@@ -15,6 +15,7 @@ export const GithubButton = ({
   onSuccess,
   onError,
   isLoading = false,
+  disabled = false,
 }: GithubButtonProps) => {
   const handleGithubSignIn = async () => {
     try {
@@ -44,7 +45,7 @@ export const GithubButton = ({
       variant="outline"
       className="w-full rounded-full"
       onClick={handleGithubSignIn}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
     >
       {isLoading ? (
         <>

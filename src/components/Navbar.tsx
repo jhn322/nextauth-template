@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   ChevronDown,
   HelpCircle,
@@ -122,7 +123,13 @@ export function Navbar() {
 
             {/* Auth Buttons & User Dropdown */}
             <div className="hidden md:block">
-              {isAuthenticated ? (
+              {status === 'loading' ? (
+                <div className="flex items-center gap-2 px-2 py-1">
+                  <Skeleton className="h-5 w-5 rounded-full" />
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-5 w-5 rounded-full" />
+                </div>
+              ) : isAuthenticated ? (
                 <DropdownMenu onOpenChange={setIsDropdownOpen}>
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -203,7 +210,7 @@ export function Navbar() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              ) : status === 'unauthenticated' ? (
+              ) : (
                 <Link href={AUTH_PATHS.LOGIN}>
                   <Button
                     variant="default"
@@ -212,13 +219,15 @@ export function Navbar() {
                     Log in
                   </Button>
                 </Link>
-              ) : null}
+              )}
             </div>
 
             {/* User Dropdown (if authenticated) */}
             <div className="flex items-center gap-2 md:hidden">
               {/* Mobile User Dropdown */}
-              {isAuthenticated && (
+              {status === 'loading' ? (
+                <Skeleton className="h-10 w-10 rounded-md" />
+              ) : isAuthenticated ? (
                 <DropdownMenu onOpenChange={setIsDropdownOpen}>
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -295,7 +304,7 @@ export function Navbar() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              )}
+              ) : null}
 
               {/* Mobile Menu Button */}
               <Button

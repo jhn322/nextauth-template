@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: `${APP_NAME} | Next.js Auth Mongo Template`,
+  title: `${APP_NAME} | Next.js NextAuth Template Template`,
   description: `${APP_NAME} is a Next.js Authentication MongoDB Template`,
   keywords: ['Next.js', 'Authentication', 'MongoDB', 'Template'],
   icons: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     apple: '/favicon.ico',
   },
   openGraph: {
-    title: `${APP_NAME} | Next.js Auth Mongo Template`,
+    title: `${APP_NAME} | Next.js NextAuth Template Template`,
     description: `${APP_NAME} is a Next.js Authentication MongoDB Template`,
     type: 'website',
     locale: 'en_US',
