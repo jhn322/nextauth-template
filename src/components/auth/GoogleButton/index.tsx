@@ -25,7 +25,7 @@ export const GoogleButton = ({
       ) : (
         <>
           <GoogleIcon />
-          {mode === 'login' ? 'Sign in with Google' : 'Sign up with Google'}
+          {mode === 'login' ? 'Google' : 'Google'}
         </>
       )}
     </Button>

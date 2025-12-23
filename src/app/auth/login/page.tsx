@@ -7,12 +7,16 @@ import Link from 'next/link';
 import { toast } from 'sonner';
 import { GoogleButton } from '@/components/auth/GoogleButton';
 import { GithubButton } from '@/components/auth/GithubButton';
+import { DiscordButton } from '@/components/auth/DiscordButton';
+import { TwitterButton } from '@/components/auth/TwitterButton';
 import { AuthDivider } from '@/components/auth/AuthDivider';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { useAuthForm } from '@/lib/auth/hooks/useAuthForm';
 import type { AuthFormData } from '@/components/auth/AuthForm/types';
 import { useGoogleAuth } from '@/lib/auth/hooks/useGoogleAuth';
 import { useGithubAuth } from '@/lib/auth/hooks/useGithubAuth';
+import { useDiscordAuth } from '@/lib/auth/hooks/useDiscordAuth';
+import { useTwitterAuth } from '@/lib/auth/hooks/useTwitterAuth';
 import { useRedirect } from '@/lib/auth/hooks/useRedirect';
 import { DEFAULT_LOGIN_REDIRECT } from '@/lib/auth/constants/auth';
 import { useAuth } from '@/context/auth-context';
@@ -56,6 +60,16 @@ function LoginContent() {
     onError: (error) => setError(error.message),
   });
 
+  const { loading: discordLoading, handleDiscordSignIn } = useDiscordAuth({
+    onSuccess: redirectToCallback,
+    onError: (error) => setError(error.message),
+  });
+
+  const { loading: twitterLoading, handleTwitterSignIn } = useTwitterAuth({
+    onSuccess: redirectToCallback,
+    onError: (error) => setError(error.message),
+  });
+
   useEffect(() => {
     if (!authLoading && authenticated) {
       router.push(DEFAULT_LOGIN_REDIRECT);
@@ -63,7 +77,12 @@ function LoginContent() {
   }, [authenticated, authLoading, router]);
 
   const isAnyLoading =
-    formLoading || googleLoading || githubLoading || authLoading;
+    formLoading ||
+    googleLoading ||
+    githubLoading ||
+    discordLoading ||
+    twitterLoading ||
+    authLoading;
 
   if (authLoading || (!authLoading && authenticated)) {
     return (
@@ -111,7 +130,7 @@ function LoginContent() {
           </div>
 
           <div className="mt-10 space-y-6">
-            <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-3">
               <GoogleButton
                 mode="login"
                 onSuccess={handleGoogleSignIn}
@@ -123,6 +142,18 @@ function LoginContent() {
                 onSuccess={handleGithubSignIn}
                 disabled={isAnyLoading}
                 isLoading={githubLoading}
+              />
+              <DiscordButton
+                mode="login"
+                onSuccess={handleDiscordSignIn}
+                disabled={isAnyLoading}
+                isLoading={discordLoading}
+              />
+              <TwitterButton
+                mode="login"
+                onSuccess={handleTwitterSignIn}
+                disabled={isAnyLoading}
+                isLoading={twitterLoading}
               />
             </div>
             <AuthDivider text="Or sign in with email" />

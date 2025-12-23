@@ -41,6 +41,8 @@ export const AUTH_MESSAGES = {
   ERROR_LOGIN_FAILED: 'Sign in failed.',
   ERROR_GOOGLE_SIGNIN_FAILED: 'Sign in with Google failed.',
   ERROR_GITHUB_SIGNIN_FAILED: 'Sign in with GitHub failed.',
+  ERROR_DISCORD_SIGNIN_FAILED: 'Sign in with Discord failed.',
+  ERROR_TWITTER_SIGNIN_FAILED: 'Sign in with X failed.',
   ERROR_PASSWORD_MISMATCH: 'Passwords do not match.',
   ERROR_PASSWORD_REQUIRED: 'Password is required.',
   ERROR_UNAUTHORIZED: 'You do not have permission to view this page.',
