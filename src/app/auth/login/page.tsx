@@ -178,7 +178,7 @@ function LoginContent() {
       <div className="relative hidden w-0 flex-1 lg:block">
         <Image
           className="absolute inset-0 h-full w-full object-cover"
-          src="/placeholder.webp"
+          src="/login.webp"
           alt="Sign in illustration"
           fill
           priority

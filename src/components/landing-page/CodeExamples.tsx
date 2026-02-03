@@ -179,7 +179,7 @@ export function CodeExamples() {
       >
         <motion.div variants={itemVariants} className="mb-20 text-center">
           <h2 className="text-foreground mb-4 text-4xl font-bold text-balance md:text-5xl">
-            Production-Ready Code Examples
+            Production-Ready Code
           </h2>
           <p className="text-foreground/60 mx-auto max-w-2xl text-lg">
             Clean, documented code. Copy, paste, ship. Everything you need to

@@ -211,14 +211,24 @@ export function Navbar() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <Link href={AUTH_PATHS.LOGIN}>
-                  <Button
-                    variant="default"
-                    className="bg-foreground text-background hover:bg-foreground/90 w-full"
-                  >
-                    Log in
-                  </Button>
-                </Link>
+                <div className="flex items-center gap-2">
+                  <Link href={AUTH_PATHS.LOGIN}>
+                    <Button
+                      variant="outline"
+                      className="border-foreground text-foreground hover:bg-accent hover:text-accent-foreground"
+                    >
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link href={AUTH_PATHS.REGISTER}>
+                    <Button
+                      variant="default"
+                      className="bg-foreground text-background hover:bg-foreground/90"
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
+                </div>
               )}
             </div>
 
@@ -365,20 +375,34 @@ export function Navbar() {
                 </Link>
               ))}
 
-              <div className="mt-8 w-full max-w-[200px]">
+              <div className="mt-8 flex w-full flex-col gap-3">
                 {status === 'unauthenticated' && (
-                  <Link
-                    href={AUTH_PATHS.LOGIN}
-                    className="block w-full"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Button
-                      variant="default"
-                      className="bg-foreground text-background hover:bg-foreground/90 text-md w-full transition-colors"
+                  <>
+                    <Link
+                      href={AUTH_PATHS.LOGIN}
+                      className="block w-full"
+                      onClick={() => setIsOpen(false)}
                     >
-                      Log in
-                    </Button>
-                  </Link>
+                      <Button
+                        variant="outline"
+                        className="border-foreground text-foreground hover:bg-accent hover:text-accent-foreground text-md w-full transition-colors"
+                      >
+                        Sign In
+                      </Button>
+                    </Link>
+                    <Link
+                      href={AUTH_PATHS.REGISTER}
+                      className="block w-full"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <Button
+                        variant="default"
+                        className="bg-foreground text-background hover:bg-foreground/90 text-md w-full transition-colors"
+                      >
+                        Sign Up
+                      </Button>
+                    </Link>
+                  </>
                 )}
               </div>
             </div>
