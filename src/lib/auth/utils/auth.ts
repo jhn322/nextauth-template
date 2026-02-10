@@ -5,7 +5,7 @@ import { USER_ROLES, UserRole } from "@/lib/auth/constants/auth";
  */
 export const formatRole = (role: UserRole): string => {
   const roleMap: Record<UserRole, string> = {
-    [USER_ROLES.USER]: "Student",
+    [USER_ROLES.USER]: "User",
     [USER_ROLES.ADMIN]: "Administrator",
   };
   return roleMap[role] || role;

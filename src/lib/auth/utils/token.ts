@@ -37,7 +37,6 @@ export async function createVerificationToken(
     console.log(`Deleting ${deleteResult.count} existing tokens for ${email}`);
   } catch (error) {
     console.error(`Error deleting old tokens for ${email}:`, error);
-    // Continue anyway, this is just a precaution
   }
 
   // Create a new token
@@ -64,7 +63,7 @@ export async function createVerificationToken(
     }
   } catch (error) {
     console.error(`Error creating token for ${email}:`, error);
-    throw error; // This is a critical error, so we rethrow it
+    throw error;
   }
 
   return token;

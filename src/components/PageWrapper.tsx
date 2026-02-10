@@ -13,15 +13,12 @@ const PageWrapper = ({ children }: PageWrapperProps) => {
   const pathname = usePathname();
 
   // Function to check if path matches any pattern in the list
-  // (Next.js path matching might be more robust, but this works for simple cases)
   const isPathMatch = (path: string, patterns: string[]): boolean => {
     return patterns.some((pattern) => {
       if (pattern.endsWith(':path*')) {
-        // Handle patterns like /signup/:path*
         const basePattern = pattern.replace('/:path*', '');
         return path.startsWith(basePattern + '/') || path === basePattern;
       }
-      // Handle exact paths
       return path === pattern;
     });
   };

@@ -78,12 +78,6 @@ export const configureProviders = () => [
       return {
         id: profile.data.id,
         name: profile.data.name,
-        // email is not always available in Twitter API v2 without elevated access,
-        // but we'll try to map it if present or handle it gracefully.
-        // Note: NextAuth Twitter 2.0 profile structure might be different.
-        // Usually it's converting the response.
-        // Let's rely on default profile mapping if possible or check docs structure.
-        // For v2, profile.data contains the user info.
         email:
           profile.data.email ??
           `twitter-${profile.data.id}@no-email.twitter.com`,

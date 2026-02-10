@@ -13,7 +13,7 @@ interface LogoutButtonProps {
 export const LogoutButton = ({ children, className }: LogoutButtonProps) => {
   const handleLogout = () => {
     signOut({
-      callbackUrl: AUTH_ROUTES.LOGIN, // Redirect to login page after logout
+      callbackUrl: AUTH_ROUTES.LOGIN,
       redirect: true,
     });
   };
@@ -21,7 +21,7 @@ export const LogoutButton = ({ children, className }: LogoutButtonProps) => {
   return (
     <Button
       onClick={handleLogout}
-      variant="ghost" // Or another passing variant
+      variant="ghost"
       className={`flex items-center gap-2 ${className || ''}`}
     >
       {children || (

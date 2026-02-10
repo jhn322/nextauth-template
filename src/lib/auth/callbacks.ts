@@ -6,11 +6,6 @@ import { USER_ROLES } from '@/lib/auth/constants/auth';
 //* Callback-functions for NextAuth.js
 
 export const configureCallbacks = () => ({
-  /**
-   ** Runs when a user is successfully authenticated.
-   ** This is where you can run any custom logic, such as creating or linking
-   ** accounts, sending emails, etc.
-   */
   async signIn({
     user,
     account,
@@ -54,11 +49,9 @@ export const configureCallbacks = () => ({
           });
 
           // Update the user's name and image
-          // await prisma.user.update({ where: { id: existingUser.id }, data: { name: user.name, image: user.image } });
         }
       } catch (error) {
         console.error('AUTH: Error linking account in signIn callback:', error);
-        // return false;
       }
     }
     // Always return true to indicate a successful authentication
@@ -92,7 +85,7 @@ export const configureCallbacks = () => ({
         token.role = dbUser.role;
         // Also ensure name is up to date from DB if not just updated
         if (trigger !== 'update') {
-           token.name = dbUser.name;
+          token.name = dbUser.name;
         }
       } else {
         // Fallback to default role if user is not found in the database

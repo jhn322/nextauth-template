@@ -36,12 +36,6 @@ export const authOptions: NextAuthOptions = {
 
   // Events for authentication
   events: {
-    /**
-     * Handles user login specifically for OAuth authentication (Google and GitHub)
-     * - If the user exists: Update name and profile image
-     * - If new user: Create account with USER role
-     * This ensures that the database is kept in sync with OAuth profile data
-     */
     async signIn({ user, account }) {
       if (account?.provider === 'google' || account?.provider === 'github') {
         // Update or create user with correct role
