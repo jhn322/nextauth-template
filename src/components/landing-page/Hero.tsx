@@ -94,7 +94,7 @@ export function Hero() {
                 <div className="h-3 w-3 rounded-full bg-yellow-500" />
                 <div className="h-3 w-3 rounded-full bg-green-500" />
               </div>
-              <pre className="overflow-x-auto text-blue-400">
+              <pre className="overflow-x-auto text-green-400">
                 <code>{`// One command to get started
 npx create-next-app@latest --auth-template
 

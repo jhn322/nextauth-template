@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useSession, signOut } from 'next-auth/react';
+import { formatRole } from '@/lib/auth/utils/auth';
 import { OnlineStatusIndicator } from '@/components/ui/online-status-indicator';
 import {
   DropdownMenu,
@@ -15,11 +16,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   ChevronDown,
-  HelpCircle,
   LogOut,
   Settings,
   User,
@@ -51,7 +52,9 @@ export function Navbar() {
   // Check if user is authenticated
   const isAuthenticated = status === 'authenticated';
   // Get user's role if authenticated
-  const userRole = session?.user?.role;
+  type UserRole = 'USER' | 'ADMIN';
+  const userRole: UserRole =
+    (session?.user as { role?: UserRole })?.role ?? 'USER';
 
   // Build up nav list with only public links
   const navItems = [...publicNavItems];
@@ -164,7 +167,7 @@ export function Navbar() {
                           <div className="flex min-w-0 flex-1 flex-col space-y-1">
                             <p className="truncate text-sm leading-none font-medium">
                               {capitalizeFirstLetter(session?.user?.name) ||
-                                'Användare'}
+                                'User name'}
                             </p>
                             <p
                               className="text-foreground/90 truncate text-xs leading-none"
@@ -172,6 +175,16 @@ export function Navbar() {
                             >
                               {session?.user?.email}
                             </p>
+                            {userRole === 'ADMIN' && (
+                              <div className="mt-1">
+                                <Badge
+                                  variant="outline"
+                                  className="border-green-500/60 bg-green-500/10 text-green-500"
+                                >
+                                  {formatRole(userRole)}
+                                </Badge>
+                              </div>
+                            )}
                           </div>
                         </div>
                         <OnlineStatusIndicator className="ml-2 h-2.5 w-2.5" />
@@ -248,39 +261,62 @@ export function Navbar() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56" align="end" forceMount>
                     <DropdownMenuLabel className="font-normal">
-                      <div className="flex min-w-0 items-center gap-3">
-                        <Avatar className="h-9 w-9 shrink-0">
-                          <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium">
-                            {session?.user?.email?.charAt(0).toUpperCase() ||
-                              'U'}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex min-w-0 flex-1 flex-col space-y-1">
-                          <p className="truncate text-sm leading-none font-medium">
-                            {capitalizeFirstLetter(session?.user?.name) ||
-                              'Användare'}
-                          </p>
-                          <p
-                            className="text-foreground/90 truncate text-xs leading-none"
-                            title={session?.user?.email || ''}
-                          >
-                            {session?.user?.email}
-                          </p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex min-w-0 items-center gap-3">
+                          <Avatar className="h-9 w-9 shrink-0">
+                            <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium">
+                              {session?.user?.email?.charAt(0).toUpperCase() ||
+                                'U'}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex min-w-0 flex-1 flex-col space-y-1">
+                            <p className="truncate text-sm leading-none font-medium">
+                              {capitalizeFirstLetter(session?.user?.name) ||
+                                'User name'}
+                            </p>
+                            <p
+                              className="text-foreground/90 truncate text-xs leading-none"
+                              title={session?.user?.email || ''}
+                            >
+                              {session?.user?.email}
+                            </p>
+                            {userRole === 'ADMIN' && (
+                              <div className="mt-1">
+                                <Badge
+                                  variant="outline"
+                                  className="border-green-500/60 bg-green-500/10 text-green-500"
+                                >
+                                  {formatRole(userRole)}
+                                </Badge>
+                              </div>
+                            )}
+                          </div>
                         </div>
+                        <OnlineStatusIndicator className="ml-2 h-2.5 w-2.5" />
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    {userRole === 'USER' && (
-                      <Link
-                        href={PROTECTED_PATHS.DASHBOARD_BASE}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <DropdownMenuItem className="cursor-pointer">
-                          <LayoutDashboard className="mr-2 h-4 w-4" />
-                          <span>Dashboard</span>
-                        </DropdownMenuItem>
-                      </Link>
-                    )}
+
+                    <Link
+                      href={PROTECTED_PATHS.DASHBOARD_BASE}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <DropdownMenuItem className="cursor-pointer">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        <span>Dashboard</span>
+                      </DropdownMenuItem>
+                    </Link>
+
+                    <Link
+                      href={PROTECTED_PATHS.DOCUMENTATION_BASE}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <DropdownMenuItem className="cursor-pointer">
+                        <BookOpen className="mr-2 h-4 w-4" />
+                        <span>Documentation</span>
+                      </DropdownMenuItem>
+                    </Link>
+
                     <Link
                       href={PROTECTED_PATHS.SETTINGS_BASE}
                       onClick={() => setIsOpen(false)}
@@ -290,10 +326,6 @@ export function Navbar() {
                         <span>Settings</span>
                       </DropdownMenuItem>
                     </Link>
-                    <DropdownMenuItem disabled className="cursor-not-allowed">
-                      <HelpCircle className="mr-2 h-4 w-4" />
-                      <span>FAQ</span>
-                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={() => {
@@ -303,7 +335,7 @@ export function Navbar() {
                       className="cursor-pointer"
                     >
                       <LogOut className="mr-2 h-4 w-4" />
-                      <span>Logga ut</span>
+                      <span>Log out</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
