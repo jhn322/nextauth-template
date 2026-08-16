@@ -226,7 +226,11 @@ export function Navbar() {
                 </DropdownMenu>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Link href="https://github.com/jhn322/better-auth-template">
+                  <Link
+                    href="https://github.com/jhn322/better-auth-template"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <Button
                       variant="default"
                       size="lg"
@@ -417,6 +421,8 @@ export function Navbar() {
                     <Link
                       href="https://github.com/jhn322/better-auth-template"
                       className="block w-full"
+                      target="_blank"
+                      rel="noreferrer"
                       onClick={() => setIsOpen(false)}
                     >
                       <Button
