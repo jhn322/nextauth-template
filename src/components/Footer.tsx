@@ -24,7 +24,10 @@ export default function Footer() {
       links: [
         { label: 'Documentation', href: '#docs' },
         { label: 'API Reference', href: '#api' },
-        { label: 'GitHub', href: 'https://github.com' },
+        {
+          label: 'GitHub',
+          href: 'https://github.com/jhn322/better-auth-template',
+        },
         { label: 'Community', href: '#community' },
       ],
     },
@@ -65,13 +68,13 @@ export default function Footer() {
             </p>
             <div className="flex gap-4 pt-4">
               <Link
-                href="#"
+                href="https://github.com/jhn322/better-auth-template"
                 className="text-foreground/60 hover:text-primary transition-colors"
               >
                 <Github className="h-5 w-5" />
               </Link>
               <Link
-                href="#"
+                href=""
                 className="text-foreground/60 hover:text-primary transition-colors"
               >
                 <Twitter className="h-5 w-5" />

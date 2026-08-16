@@ -26,6 +26,7 @@ import {
   User,
   LayoutDashboard,
   BookOpen,
+  Github,
 } from 'lucide-react';
 import { AUTH_PATHS, PROTECTED_PATHS } from '@/lib/constants/routes';
 
@@ -66,7 +67,7 @@ export function Navbar() {
   // Close menu when screen becomes larger
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsOpen(false);
       }
     };
@@ -110,7 +111,7 @@ export function Navbar() {
             </div>
 
             {/* Desktop Navigation - Centered */}
-            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex">
+            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 lg:flex">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -125,7 +126,7 @@ export function Navbar() {
             </div>
 
             {/* Auth Buttons & User Dropdown */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               {status === 'loading' ? (
                 <div className="flex items-center gap-2 px-2 py-1">
                   <Skeleton className="h-5 w-5 rounded-full" />
@@ -225,6 +226,16 @@ export function Navbar() {
                 </DropdownMenu>
               ) : (
                 <div className="flex items-center gap-2">
+                  <Link href="https://github.com/jhn322/better-auth-template">
+                    <Button
+                      variant="default"
+                      size="lg"
+                      className="border-border bg-foreground text-background hover:bg-foreground/90 gap-2"
+                    >
+                      <Github className="h-4 w-4" />
+                      <span>Github</span>
+                    </Button>
+                  </Link>
                   <Link href={AUTH_PATHS.LOGIN}>
                     <Button
                       variant="default"
@@ -239,7 +250,7 @@ export function Navbar() {
             </div>
 
             {/* User Dropdown (if authenticated) */}
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-2 lg:hidden">
               {/* Mobile User Dropdown */}
               {status === 'loading' ? (
                 <Skeleton className="h-10 w-10 rounded-md" />
@@ -345,7 +356,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative h-14 w-14 p-0 hover:bg-transparent md:hidden"
+                className="relative h-14 w-14 p-0 hover:bg-transparent lg:hidden"
                 onClick={handleToggleMenu}
                 aria-expanded={isOpen}
                 aria-label="Toggle menu"
@@ -379,7 +390,7 @@ export function Navbar() {
 
         {/* Mobile Menu Overlay */}
         <div
-          className={`bg-background fixed inset-0 z-40 transition-transform duration-500 ease-in-out md:hidden ${
+          className={`bg-background fixed inset-0 z-40 transition-transform duration-500 ease-in-out lg:hidden ${
             isOpen ? 'translate-y-16' : 'translate-y-[-100%]'
           }`}
         >
@@ -403,6 +414,20 @@ export function Navbar() {
               <div className="mt-8 flex w-full flex-col gap-3">
                 {status === 'unauthenticated' && (
                   <>
+                    <Link
+                      href="https://github.com/jhn322/better-auth-template"
+                      className="block w-full"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <Button
+                        variant="default"
+                        size="lg"
+                        className="border-border bg-foreground text-background hover:bg-foreground/90 text-md w-full gap-2 transition-colors"
+                      >
+                        <Github className="h-4 w-4" />
+                        <span>Github</span>
+                      </Button>
+                    </Link>
                     <Link
                       href={AUTH_PATHS.LOGIN}
                       className="block w-full"
