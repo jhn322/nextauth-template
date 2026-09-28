@@ -10,7 +10,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "postman:generate": "node Postman/create-postman-collection.js",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "keepalive": "tsx scripts/keepalive.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
